@@ -240,3 +240,12 @@ p {
 }
 
 
+
+
+
+
+
+.back-button {
+    display: inline-flex;
+    gap: 10px;
+}

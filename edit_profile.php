@@ -1,6 +1,5 @@
 <?php
-require('classes/Utils.php');
-Utils::checkUserLoggedIn();
+
 
 ?>
 
