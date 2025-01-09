@@ -1,4 +1,7 @@
 <?php
+require('classes/Utils.php');
+Utils::checkUserLoggedIn();
+
 require('config.php');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -21,12 +24,14 @@ $userInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Profil de l'Utilisateur</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
+
 <body>
-<header>
+    <header>
         <h1>Mon profil - Librairie XYZ</h1>
     </header>
     <p>Nom : <?php echo $userInfo['nom']; ?></p>
@@ -36,4 +41,5 @@ $userInfo = $stmt->fetch(PDO::FETCH_ASSOC);
     <button onclick="window.location.href ='index.php'">Retour à l'accueil</button>
 
 </body>
+
 </html>

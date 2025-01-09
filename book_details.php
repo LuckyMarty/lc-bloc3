@@ -1,5 +1,7 @@
 <?php
 require('config.php');
+require('classes/Utils.php');
+Utils::checkUserLoggedIn();
 
 if (isset($_GET['id'])) {
     $bookId = $_GET['id'];

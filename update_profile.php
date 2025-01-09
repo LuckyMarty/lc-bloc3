@@ -1,4 +1,7 @@
 <?php
+require('classes/Utils.php');
+Utils::checkUserLoggedIn();
+
 require('config.php');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -28,4 +31,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Redirigez l'utilisateur vers son profil mis à jour
     header('Location: profile.php');
 }
-?>

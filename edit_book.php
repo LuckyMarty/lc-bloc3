@@ -1,4 +1,7 @@
 <?php
+require('classes/Utils.php');
+Utils::checkUserLoggedIn();
+
 require('config.php');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();

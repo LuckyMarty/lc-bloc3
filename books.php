@@ -1,5 +1,11 @@
+<?php
+require('classes/Utils.php');
+Utils::checkUserLoggedIn();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Liste des Livres - Librairie XYZ</title>
@@ -14,7 +20,7 @@
         }
 
         header {
-       
+
             color: #fff;
             text-align: center;
             padding: 1em 0;
@@ -32,24 +38,26 @@
             margin-top: 20px;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
 
         th {
-    
+
             color: #fff;
         }
 
         .book-image {
-            max-width: 100px; /* Ajustez la taille maximale de l'image selon vos besoins */
+            max-width: 100px;
+            /* Ajustez la taille maximale de l'image selon vos besoins */
             height: auto;
         }
 
         button {
-     
+
             color: #fff;
             padding: 10px 20px;
             border: none;
@@ -76,6 +84,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Liste des Livres - Librairie XYZ</h1>
@@ -107,12 +116,13 @@
             echo "Erreur lors de la récupération des livres.";
         }
         ?>
-  <!-- Bouton "Ajouter un livre" visible uniquement pour les admins -->
+        <!-- Bouton "Ajouter un livre" visible uniquement pour les admins -->
         <?php if ($_SESSION['role'] === 'admin') : ?>
             <button onclick="window.location.href = 'add_book.php'">Ajouter un livre</button>
         <?php endif; ?>
         <button onclick="window.location.href = 'index.php'">Retour à l'accueil</button>
-        
+
     </div>
 </body>
+
 </html>

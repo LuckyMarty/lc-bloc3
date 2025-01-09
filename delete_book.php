@@ -1,4 +1,7 @@
 <?php
+require('classes/Utils.php');
+Utils::checkUserLoggedIn();
+
 require('config.php');
 
 // Assurez-vous que l'ID du livre que vous souhaitez supprimer est passé en tant que paramètre (par exemple, dans l'URL).
