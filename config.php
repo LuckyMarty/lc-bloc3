@@ -3,11 +3,14 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+require 'vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/');
+$dotenv->load();
 
-$host = 'localhost';
-$dbname = 'lc_bloc3';
-$username = 'root';
-$password = 'root';
+$host = $_ENV['DB_HOST'];
+$dbname = $_ENV['DB_NAME'];
+$username = $_ENV['DB_USER'];
+$password = $_ENV['DB_PASS'];
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -16,3 +19,4 @@ try {
     die("Erreur de connexion à la base de données : " . $e->getMessage());
 }
 ?>
+

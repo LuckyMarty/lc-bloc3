@@ -9,7 +9,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 
 include("config.php");
-include("header.php");
+// include("header.php");
 
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
