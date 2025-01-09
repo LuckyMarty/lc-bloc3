@@ -1,6 +1,7 @@
 <?php
 require('config.php');
 
+
 if (isset($_GET['id'])) {
     $bookId = $_GET['id'];
 
@@ -21,28 +22,38 @@ if (isset($_GET['id'])) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Détails du Livre</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
-         .book-image {
+        .book-image {
             max-width: 30%;
             height: auto;
             display: block;
-            margin: 0 auto; /* Pour centrer l'image */
+            margin: 0 auto;
+            /* Pour centrer l'image */
         }
-        </style>
+    </style>
+
+    <!-- style -->
+     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
+
 <body>
     <header>
         <h1>Détails du Livre</h1>
     </header>
     <div class="container">
+    <button onclick="window.location.href = 'books.php'"
+        style="width: 200px; height: 50px; margin-top: 20px; margin-bottom: 20px;"
+    >Retour à la liste des livres</button>
+
         <div class="details">
             <?php if (isset($book)) : ?>
                 <h3><?= htmlspecialchars($book['titre']); ?></h3>
 
-                <?php echo '<img class="book-image" src="' . htmlspecialchars($book['photo_url']) . '" alt="' . htmlspecialchars($book['titre']) . '">';?>
+                <?php echo '<img class="book-image" src="' . htmlspecialchars($book['photo_url']) . '" alt="' . htmlspecialchars($book['titre']) . '">'; ?>
                 <p>Auteur : <?= htmlspecialchars($book['auteur']); ?></p>
                 <p>Année de publication : <?= htmlspecialchars($book['date_publication']); ?></p>
                 <p>ISBN : <?= htmlspecialchars($book['isbn']); ?></p>
@@ -54,18 +65,20 @@ if (isset($_GET['id'])) {
             <?php endif; ?>
         </div>
         <div class="back-button">
-    <button onclick="window.location.href = 'books.php'">Retour à la liste des livres</button>
+            <?php if ($book['statut'] === 'disponible') : ?>
+                <button onclick="window.location.href = 'borrow_book.php?book_id=<?= $bookId ?>'">Emprunter le livre</button>
+            <?php endif; ?>
 
-    <?php
-    // Ajoutez une vérification du rôle de l'utilisateur
-    if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
-        // Si l'utilisateur est un administrateur, affichez les boutons "Modifier" et "Supprimer"
-        echo '<button onclick="window.location.href = \'edit_book.php?book_id=' . $bookId . '\'">Modifier le livre</button>';
-        echo '<button onclick="showDeleteConfirmation(' . $bookId . ')">Supprimer le livre</button>';
-    }
-    ?>
+            <?php
+            // Ajoutez une vérification du rôle de l'utilisateur
+            if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+                // Si l'utilisateur est un administrateur, affichez les boutons "Modifier" et "Supprimer"
+                echo '<button onclick="window.location.href = \'edit_book.php?book_id=' . $bookId . '\'">Modifier le livre</button>';
+                echo '<button onclick="showDeleteConfirmation(' . $bookId . ')">Supprimer le livre</button>';
+            }
+            ?>
 
-</div>
+        </div>
 
     </div>
 </body>
@@ -81,4 +94,3 @@ if (isset($_GET['id'])) {
 </script>
 
 </html>
-

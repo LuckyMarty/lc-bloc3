@@ -1,3 +1,10 @@
+# Commande pour lancer le teste
+```cmd
+vendor/bin/phpunit --testdox tests/EmpruntTest.php
+```
+
+
+
 # evaluation-librairie
 
 **README - Initialisation du Projet en Local**
