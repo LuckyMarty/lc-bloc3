@@ -1,19 +1,21 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require('config.php');
 
+require('classes/Home.php');
+
+$home = new Home($pdo);
 
 // Récupérer le nombre total de livres
-$queryTotalBooks = "SELECT COUNT(*) as total_books FROM livres";
-$stmtTotalBooks = $pdo->prepare($queryTotalBooks);
-$stmtTotalBooks->execute();
-$resultTotalBooks = $stmtTotalBooks->fetch(PDO::FETCH_ASSOC);
-
+$resultTotalBooks = $home->getTotalBooks();
 
 // Récupérer le nombre d'utilisateurs enregistrés
-$queryTotalUsers = "SELECT COUNT(*) as total_users FROM utilisateurs";
-$stmtTotalUsers = $pdo->prepare($queryTotalUsers);
-$stmtTotalUsers->execute();
-$resultTotalUsers = $stmtTotalUsers->fetch(PDO::FETCH_ASSOC);
+$resultTotalUsers = $home->getTotalUsers();
+
+// Récupérer le nombre total d'emprunts
+$resultTotalEmprunts = $home->getTotalEmprunts();
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,6 +36,7 @@ $resultTotalUsers = $stmtTotalUsers->fetch(PDO::FETCH_ASSOC);
             <li>Bonjour <?= $_SESSION['prenom']; ?></li>
             <li><a href="books.php">Voir la liste des livres</a></li>
             <li><a href="profile.php">Mon profil</a></li>
+            <li><a href="emprunts.php">Mes emprunts</a></li>
             <li><a href="logout.php">Deconnexion</a></li>
         <?php else : ?>
             <li><a href="login.php">Connexion</a></li>
@@ -62,6 +65,11 @@ $resultTotalUsers = $stmtTotalUsers->fetch(PDO::FETCH_ASSOC);
         <div class="statistic">
             <h3>Utilisateurs Enregistrés</h3>
             <p><?php echo $resultTotalUsers['total_users']; ?></p>
+        </div>
+
+        <div class="statistic">
+            <h3>Total des Emprunts</h3>
+            <p><?php echo $resultTotalEmprunts['total_emprunts']; ?></p>
         </div>
 
         <!-- ... Autres statistiques ... -->
